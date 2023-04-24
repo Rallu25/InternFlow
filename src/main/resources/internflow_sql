@@ -11,7 +11,8 @@ CREATE SEQUENCE intern_flow.sq_id START 1;
 
 
 CREATE TABLE IF NOT EXISTS intern_flow.Team (
-    team_id BIGINT PRIMARY KEY DEFAULT NEXTVAL('intern_flow.sq_team_id')
+    team_id BIGINT PRIMARY KEY DEFAULT NEXTVAL('intern_flow.sq_team_id'),
+    team_leader_id BIGINT REFERENCES intern_flow.Student(student_id)
 );
 
 
