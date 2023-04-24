@@ -15,6 +15,14 @@ public class TeamEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teamGenerator")
     private Long teamId;
 
+    public TeamEntity() {
+    }
 
+    public Long getTeamId() {
+        return teamId;
+    }
 
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
+    }
 }
