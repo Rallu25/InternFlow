@@ -2,6 +2,8 @@ package com.ibm.internflow.entity;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "Team")
 public class TeamEntity {
@@ -15,6 +17,10 @@ public class TeamEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teamGenerator")
     private Long teamId;
 
+    @OneToMany(mappedBy = "student")
+    private Set<StudentEntity> students;
+
+
     public TeamEntity() {
     }
 
@@ -24,5 +30,13 @@ public class TeamEntity {
 
     public void setTeamId(Long teamId) {
         this.teamId = teamId;
+    }
+
+    public Set<StudentEntity> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<StudentEntity> students) {
+        this.students = students;
     }
 }

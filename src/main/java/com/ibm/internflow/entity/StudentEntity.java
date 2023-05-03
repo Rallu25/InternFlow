@@ -3,6 +3,9 @@ package com.ibm.internflow.entity;
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "Student")
 public class StudentEntity {
@@ -29,6 +32,15 @@ public class StudentEntity {
     @Column(name = "email")
     @Nonnull
     private String email;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "team_id")
+    private StudentEntity student;
+
+    @ManyToMany(mappedBy = "students")
+    private Set<ActivitiesEntity> activities = new HashSet<>();
+
+
 
     public Long getStudentId() {
         return studentId;
@@ -64,5 +76,13 @@ public class StudentEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public StudentEntity getStudent() {
+        return student;
+    }
+
+    public void setStudent(StudentEntity student) {
+        this.student = student;
     }
 }

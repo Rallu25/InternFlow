@@ -3,6 +3,8 @@ package com.ibm.internflow.entity;
 import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "Attendance")
 
@@ -21,6 +23,15 @@ public class AttendanceEntity {
     @Column(name = "status")
     @NonNull
     private String status;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "activity_id")
+    private ActivitiesEntity activities;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mentor_id")
+    private MentorEntity mentor;
+
 
     public AttendanceEntity(){
         // no-arg constructor
