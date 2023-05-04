@@ -54,4 +54,20 @@ public class AttendanceEntity {
     public void setStatus(@NonNull String status) {
         this.status = status;
     }
+
+    public ActivitiesEntity getActivities() {
+        return activities;
+    }
+
+    public void setActivities(ActivitiesEntity activities) {
+        this.activities = activities;
+    }
+
+    public MentorEntity getMentor() {
+        return mentor;
+    }
+
+    public void setMentor(MentorEntity mentor) {
+        this.mentor = mentor;
+    }
 }

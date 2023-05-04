@@ -74,4 +74,20 @@ public class MentorEntity {
     public void setEmail(@Nonnull String email) {
         this.email = email;
     }
+
+    public Set<GradesEntity> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Set<GradesEntity> grades) {
+        this.grades = grades;
+    }
+
+    public Set<AttendanceEntity> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(Set<AttendanceEntity> attendances) {
+        this.attendances = attendances;
+    }
 }
