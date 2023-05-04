@@ -3,6 +3,9 @@ package com.ibm.internflow.entity;
 import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "Activities")
 public class ActivitiesEntity {
@@ -19,6 +22,19 @@ public class ActivitiesEntity {
     @Column(name = "activity_name")
     @NonNull
     private String activityName;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "Student_Activities",
+            joinColumns = {@JoinColumn(name = "activity_id")},
+            inverseJoinColumns = {@JoinColumn(name = "student_id")})
+    private Set<StudentEntity> students = new HashSet<>();
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "grade_id")
+    private GradesEntity grade;
+
+    @OneToMany(mappedBy = "attendance")
+    private Set<AttendanceEntity> attendances;
 
     public ActivitiesEntity() {
         //no-arg Constructor

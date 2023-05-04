@@ -1,12 +1,6 @@
 package com.ibm.internflow.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
 import jakarta.annotation.Nonnull;
 @Entity
 @Table(name = "Grades")
@@ -27,6 +21,13 @@ public class GradesEntity {
 
     @Column(name="comment")
     private String comment;
+
+    @OneToOne(mappedBy = "activities")
+    private ActivitiesEntity activities;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "mentor_id")
+    private MentorEntity mentor;
 
     public GradesEntity() {
         //no-arg Constructor
