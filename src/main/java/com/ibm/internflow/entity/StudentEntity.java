@@ -35,7 +35,7 @@ public class StudentEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
-    private StudentEntity student;
+    private TeamEntity team;
 
     @ManyToMany(mappedBy = "students")
     private Set<ActivitiesEntity> activities = new HashSet<>();
@@ -78,11 +78,21 @@ public class StudentEntity {
         this.email = email;
     }
 
-    public StudentEntity getStudent() {
-        return student;
+
+
+    public Set<ActivitiesEntity> getActivities() {
+        return activities;
     }
 
-    public void setStudent(StudentEntity student) {
-        this.student = student;
+    public void setActivities(Set<ActivitiesEntity> activities) {
+        this.activities = activities;
+    }
+
+    public TeamEntity getTeam() {
+        return team;
+    }
+
+    public void setTeam(TeamEntity team) {
+        this.team = team;
     }
 }

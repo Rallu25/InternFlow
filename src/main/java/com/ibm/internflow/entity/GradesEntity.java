@@ -56,4 +56,20 @@ public class GradesEntity {
     public void setComment(String comment) {
         this.comment = comment;
     }
+
+    public ActivitiesEntity getActivities() {
+        return activities;
+    }
+
+    public void setActivities(ActivitiesEntity activities) {
+        this.activities = activities;
+    }
+
+    public MentorEntity getMentor() {
+        return mentor;
+    }
+
+    public void setMentor(MentorEntity mentor) {
+        this.mentor = mentor;
+    }
 }

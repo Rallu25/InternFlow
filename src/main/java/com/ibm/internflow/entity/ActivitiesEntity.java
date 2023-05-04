@@ -56,4 +56,28 @@ public class ActivitiesEntity {
     public void setActivityName(String activityName) {
         this.activityName = activityName;
     }
+
+    public Set<StudentEntity> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<StudentEntity> students) {
+        this.students = students;
+    }
+
+    public GradesEntity getGrade() {
+        return grade;
+    }
+
+    public void setGrade(GradesEntity grade) {
+        this.grade = grade;
+    }
+
+    public Set<AttendanceEntity> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(Set<AttendanceEntity> attendances) {
+        this.attendances = attendances;
+    }
 }

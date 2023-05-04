@@ -17,8 +17,8 @@ public class TeamEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teamGenerator")
     private Long teamId;
 
-    @OneToMany(mappedBy = "student")
-    private Set<StudentEntity> students;
+    @OneToMany(mappedBy = "team")
+    private Set<StudentEntity>students;
 
 
     public TeamEntity() {
