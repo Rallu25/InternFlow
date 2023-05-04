@@ -4,6 +4,7 @@ import com.ibm.internflow.Transformer;
 import com.ibm.internflow.dto.StudentDto;
 import com.ibm.internflow.repository.*;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -27,5 +28,17 @@ public class StudentService {
       public List<StudentDto> getStudents() {
             return studentRepository.findAll().stream().map(Transformer::toDto).toList();
 
+      }
+
+      @Transactional
+      public void deleteById(Long id) {
+            studentRepository.deleteById(id);
+      }
+
+      public StudentDto addStudent(StudentDto studentDto) {
+            var team = teamRepository.save(Transformer.fromDto(studentDto.getTeam()));
+            var entity = Transformer.fromDto(studentDto);
+            entity.setTeam(team);
+            return Transformer.toDto(studentRepository.save(entity));
       }
 }
