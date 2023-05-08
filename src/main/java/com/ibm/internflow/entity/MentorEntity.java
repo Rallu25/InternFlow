@@ -30,10 +30,10 @@ public class MentorEntity {
     @Nonnull
     private String email;
 
-    @OneToMany(mappedBy = "grades")
+    @OneToMany(mappedBy = "mentor")
     private Set<GradesEntity> grades;
 
-    @OneToMany(mappedBy = "attendance")
+    @OneToMany(mappedBy = "mentor")
     private Set<AttendanceEntity> attendances;
 
     public MentorEntity() {

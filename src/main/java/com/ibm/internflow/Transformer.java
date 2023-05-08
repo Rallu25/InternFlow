@@ -13,7 +13,6 @@ public class Transformer {
         dto.setEmail(entity.getEmail());
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
-        dto.setTeam(toDto(entity.getTeam());
         return dto;
   }
 
@@ -23,19 +22,18 @@ public class Transformer {
         entity.setEmail(entity.getEmail());
         entity.setFirstName(entity.getFirstName());
         entity.setLastName(entity.getLastName());
-        entity.setTeam(dto.getTeam());
         return entity;
   }
 
-  public static TeamDto toDto(TeamEntity entity){
-        var dto = new TeamDto();
-        dto.setTeamId(entity.getTeamId());
-        dto.setTeamLeader(toDto(entity.getStudents());
-        return dto;
-  }
-  public static TeamEntity fromDto(TeamDto dto){
+//  public static TeamDto toDto(TeamEntity entity){
+//        var dto = new TeamDto();
+//        dto.setTeamId(entity.getTeamId());
+//        //dto.setTeamLeader(toDto(entity.getStudents());
+//        return dto;
+//  }
+  /*public static TeamEntity fromDto(TeamDto dto){
         var entity = new TeamEntity();
         entity.setTeamId(dto.getTeamId());
         entity.setStudents(dto.getTeamLeader());
-  }
+  }*/
 }

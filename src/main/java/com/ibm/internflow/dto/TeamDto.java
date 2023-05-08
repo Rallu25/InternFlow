@@ -1,8 +1,11 @@
 package com.ibm.internflow.dto;
 
+import java.util.List;
+
 public class TeamDto {
     private Long teamId;
     private StudentDto teamLeader;
+    private List<StudentDto> students;
 
     public TeamDto() {
     }
