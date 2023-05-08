@@ -36,9 +36,7 @@ public class StudentService {
       }
 
       public StudentDto addStudent(StudentDto studentDto) {
-            var team = teamRepository.save(Transformer.fromDto(studentDto.getTeam()));
             var entity = Transformer.fromDto(studentDto);
-            entity.setTeam(team);
             return Transformer.toDto(studentRepository.save(entity));
       }
 }

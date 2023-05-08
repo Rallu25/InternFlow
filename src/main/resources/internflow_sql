@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS intern_flow.Student (
 
 CREATE TABLE IF NOT EXISTS intern_flow.Mentor (
     mentor_id BIGINT PRIMARY KEY DEFAULT NEXTVAL('intern_flow.sq_mentor_id'),
+    attendance_id BIGINT REFERENCES intern_flow.Attendance(attendance_id),
     first_name VARCHAR(70) NOT NULL,
     last_name VARCHAR(70) NOT NULL,
     email VARCHAR(50) NOT NULL
@@ -35,7 +36,6 @@ CREATE TABLE IF NOT EXISTS intern_flow.Mentor (
 
 CREATE TABLE IF NOT EXISTS intern_flow.Attendance (
     attendance_id BIGINT PRIMARY KEY DEFAULT NEXTVAL('intern_flow.sq_attendance_id'),
-    mentor_id BIGINT REFERENCES intern_flow.Mentor(mentor_id),
     status VARCHAR(10) NOT NULL
 );
 

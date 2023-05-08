@@ -22,7 +22,8 @@ public class GradesEntity {
     @Column(name="comment")
     private String comment;
 
-    @OneToOne(mappedBy = "activities")
+    @OneToOne (fetch = FetchType.LAZY)
+    @JoinColumn(name = "grade_id")
     private ActivitiesEntity activities;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -33,8 +33,11 @@ public class ActivitiesEntity {
     @JoinColumn(name = "grade_id")
     private GradesEntity grade;
 
-    @OneToMany(mappedBy = "attendance")
+    @OneToMany(mappedBy = "activities")
     private Set<AttendanceEntity> attendances;
+
+    @OneToOne(mappedBy = "activities")
+    private GradesEntity grades;
 
     public ActivitiesEntity() {
         //no-arg Constructor
