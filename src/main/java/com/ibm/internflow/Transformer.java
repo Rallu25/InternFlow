@@ -25,15 +25,16 @@ public class Transformer {
         return entity;
   }
 
-//  public static TeamDto toDto(TeamEntity entity){
-//        var dto = new TeamDto();
-//        dto.setTeamId(entity.getTeamId());
-//        //dto.setTeamLeader(toDto(entity.getStudents());
-//        return dto;
-//  }
-  /*public static TeamEntity fromDto(TeamDto dto){
+  public static TeamDto toDto(TeamEntity entity){
+       var dto = new TeamDto();
+        dto.setTeamId(entity.getTeamId());
+       // dto.setTeamLeader(toDto(entity.getStudents());
+        return dto;
+  }
+  public static TeamEntity fromDto(TeamDto dto){
         var entity = new TeamEntity();
         entity.setTeamId(dto.getTeamId());
-        entity.setStudents(dto.getTeamLeader());
-  }*/
+       // entity.setStudents(dto.getTeamLeader());
+        return entity;
+  }
 }

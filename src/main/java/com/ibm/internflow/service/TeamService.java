@@ -21,9 +21,9 @@ public class TeamService {
         return teamRepository.findAll().stream().map(Transformer::toDto).toList();
     }
     public TeamDto addTeam(TeamDto teamDto){
-        var teamLeader = studentRepository.save(Transformer.fromDto(teamDto.getTeamLeader()));
+       // var teamLeader = studentRepository.save(Transformer.fromDto(teamDto.getTeamLeader()));
         var entity = Transformer.fromDto(teamDto);
-        entity.setStudents(teamLeader);
+       // entity.setStudents(teamLeader);
         return Transformer.toDto(teamRepository.save(entity));
     }
 }
