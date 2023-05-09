@@ -18,10 +18,9 @@ public class Transformer {
 
   public static StudentEntity fromDto(StudentDto dto){
         var entity = new StudentEntity();
-        entity.setStudentId(dto.getStudentId());
-        entity.setEmail(entity.getEmail());
-        entity.setFirstName(entity.getFirstName());
-        entity.setLastName(entity.getLastName());
+        entity.setEmail(dto.getEmail());
+        entity.setFirstName(dto.getFirstName());
+        entity.setLastName(dto.getLastName());
         return entity;
   }
 
