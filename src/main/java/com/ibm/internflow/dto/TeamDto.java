@@ -4,6 +4,7 @@ import java.util.List;
 
 public class TeamDto {
     private Long teamId;
+    private String teamName;
     private StudentDto teamLeader;
     private List<StudentDto> students;
 
@@ -24,5 +25,21 @@ public class TeamDto {
 
     public void setTeamLeader(StudentDto teamLeader) {
         this.teamLeader = teamLeader;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public List<StudentDto> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<StudentDto> students) {
+        this.students = students;
     }
 }
