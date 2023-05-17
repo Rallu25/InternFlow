@@ -17,9 +17,16 @@ public class TeamEntity {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teamGenerator")
     private Long teamId;
 
+    @Column(name = "team_name")
+    private String teamName;
+
+
     @OneToMany(mappedBy = "team")
     private Set<StudentEntity>students;
 
+    @ManyToOne
+    @JoinColumn(name = "team_leader_id")
+    private StudentEntity teamLeader;
 
     public TeamEntity() {
     }
@@ -38,5 +45,21 @@ public class TeamEntity {
 
     public void setStudents(Set<StudentEntity> students) {
         this.students = students;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public StudentEntity getTeamLeader() {
+        return teamLeader;
+    }
+
+    public void setTeamLeader(StudentEntity teamLeader) {
+        this.teamLeader = teamLeader;
     }
 }

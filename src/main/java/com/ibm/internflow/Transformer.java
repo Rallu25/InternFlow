@@ -5,6 +5,8 @@ import com.ibm.internflow.dto.TeamDto;
 import com.ibm.internflow.entity.StudentEntity;
 import com.ibm.internflow.entity.TeamEntity;
 
+import java.util.stream.Collectors;
+
 
 public class Transformer {
     public static StudentDto toDto(StudentEntity entity) {
@@ -24,16 +26,21 @@ public class Transformer {
         return entity;
   }
 
-  public static TeamDto toDto(TeamEntity entity){
-       var dto = new TeamDto();
+    public static TeamDto toDto(TeamEntity entity) {
+        var dto = new TeamDto();
         dto.setTeamId(entity.getTeamId());
-       // dto.setTeamLeader(toDto(entity.getStudents());
+        dto.setTeamName(entity.getTeamName());
+        dto.setTeamLeader(toDto(entity.getTeamLeader()));
+        dto.setStudents(entity.getStudents().stream().map(Transformer::toDto).toList());
         return dto;
-  }
-  public static TeamEntity fromDto(TeamDto dto){
+    }
+
+    public static TeamEntity fromDto(TeamDto dto) {
         var entity = new TeamEntity();
         entity.setTeamId(dto.getTeamId());
-       // entity.setStudents(dto.getTeamLeader());
+        entity.setTeamName(dto.getTeamName());
+        entity.setTeamLeader(fromDto(dto.getTeamLeader()));
+        entity.setStudents(dto.getStudents().stream().map(Transformer::fromDto).collect(Collectors.toSet()));
         return entity;
-  }
+    }
 }
