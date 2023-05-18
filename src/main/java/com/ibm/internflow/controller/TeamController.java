@@ -26,4 +26,10 @@ public class TeamController {
     public ResponseEntity<TeamDto> addTeam(@RequestBody TeamDto teamDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(teamService.addTeam(teamDto));
     }
+
+    @DeleteMapping("/{teamId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteTeamById(@PathVariable("teamId") Long teamId) {
+        teamService.deleteById(teamId);
+    }
 }

@@ -5,6 +5,7 @@ import com.ibm.internflow.dto.TeamDto;
 import com.ibm.internflow.repository.StudentRepository;
 import com.ibm.internflow.repository.TeamRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,11 @@ public class TeamService {
     }
     public List<TeamDto> getTeams(){
         return teamRepository.findAll().stream().map(Transformer::toDto).toList();
+    }
+
+    @Transactional
+    public void deleteById(Long id) {
+        teamRepository.deleteById(id);
     }
     public TeamDto addTeam(TeamDto teamDto) {
         var entity = Transformer.fromDto(teamDto);
