@@ -33,6 +33,13 @@ public class StudentController {
         studentService.deleteById(studentId);
     }
 
+    @GetMapping(value = "/teamId/{teamId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public  ResponseEntity<List<StudentDto>> getStudentsByTeam(
+            @PathVariable("teamId") Long teamId) {
+                return ResponseEntity.ok(studentService.getStudentsByTeam(teamId));
+    }
+
+
 
 
 }
