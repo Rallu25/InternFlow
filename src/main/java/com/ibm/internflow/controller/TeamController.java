@@ -5,6 +5,7 @@ import com.ibm.internflow.service.TeamService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class TeamController {
         return ResponseEntity.status(HttpStatus.CREATED).body(teamService.addTeam(teamDto));
     }
 
+    @Transactional
     @DeleteMapping("/{teamId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTeamById(@PathVariable("teamId") Long teamId) {
