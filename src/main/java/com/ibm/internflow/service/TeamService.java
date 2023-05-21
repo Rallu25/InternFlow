@@ -3,13 +3,16 @@ package com.ibm.internflow.service;
 import com.ibm.internflow.Transformer;
 import com.ibm.internflow.dto.TeamDto;
 import com.ibm.internflow.entity.StudentEntity;
+import com.ibm.internflow.entity.TeamEntity;
 import com.ibm.internflow.repository.StudentRepository;
 import com.ibm.internflow.repository.TeamRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 
@@ -24,20 +27,20 @@ public class TeamService {
         return teamRepository.findAll().stream().map(Transformer::toDto).toList();
     }
 
-    @Transactional
     public void deleteById(Long id) {
         teamRepository.deleteById(id);
     }
+
+    @Transactional
     public TeamDto addTeam(TeamDto teamDto) {
         var entity = Transformer.fromDto(teamDto);
-       // var teamLeader = studentRepository.save(Transformer.fromDto(teamDto.getTeamLeader()));
-       // entity.setTeamLeader(teamLeader);
-        //entity.getStudents().forEach(student -> student.setTeam(entity));
-        var dto = Transformer.toDto(teamRepository.save(entity));
-        List<StudentEntity> students = new ArrayList<>();
+        Set<StudentEntity> students = new HashSet<>();
         teamDto.getStudents().forEach(student ->students.add(studentRepository.getReferenceById(student.getStudentId())));
+        entity.setStudents(students);
+        entity.setTeamLeader(studentRepository.getReferenceById(teamDto.getTeamLeader().getStudentId()));
+        teamRepository.save(entity);
         students.forEach(student->student.setTeam(entity));
         studentRepository.saveAll(students);
-        return dto;
+        return Transformer.toDto(entity);
     }
 }
