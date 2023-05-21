@@ -9,7 +9,6 @@ import com.ibm.internflow.repository.TeamRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,7 +26,11 @@ public class TeamService {
         return teamRepository.findAll().stream().map(Transformer::toDto).toList();
     }
 
+    @Transactional
     public void deleteById(Long id) {
+        List<StudentEntity> students = studentRepository.findByTeam_TeamId(id);
+        students.forEach(student -> student.setTeam(null));
+        studentRepository.saveAll(students);
         teamRepository.deleteById(id);
     }
 
@@ -37,10 +40,18 @@ public class TeamService {
         Set<StudentEntity> students = new HashSet<>();
         teamDto.getStudents().forEach(student ->students.add(studentRepository.getReferenceById(student.getStudentId())));
         entity.setStudents(students);
-        entity.setTeamLeader(studentRepository.getReferenceById(teamDto.getTeamLeader().getStudentId()));
+        StudentEntity teamLeader = studentRepository.getReferenceById(teamDto.getTeamLeader().getStudentId());
+        entity.setTeamLeader(teamLeader);
         teamRepository.save(entity);
+        setTeamOnStudent(entity, students, teamLeader);
+
+        return Transformer.toDto(entity);
+    }
+
+    private void setTeamOnStudent(TeamEntity entity, Set<StudentEntity> students, StudentEntity teamLeader) {
+        teamLeader.setTeam(entity);
+        students.add(teamLeader);
         students.forEach(student->student.setTeam(entity));
         studentRepository.saveAll(students);
-        return Transformer.toDto(entity);
     }
 }

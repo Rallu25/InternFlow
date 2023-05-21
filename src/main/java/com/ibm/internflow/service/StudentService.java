@@ -45,4 +45,16 @@ public class StudentService {
             List<StudentEntity> students = studentRepository.findByTeam_TeamId(teamId);
             return students.stream().map(Transformer::toDto).collect(Collectors.toList());
       }
+
+      public void removeStudentFromTeam(Long studentId) {
+            StudentEntity student = studentRepository.getReferenceById(studentId);
+            student.setTeam(null);
+            studentRepository.save(student);
+      }
+
+      public void addStudentToTeam(Long teamId, StudentDto studentDto) {
+            var entity = Transformer.fromDto(studentDto);
+            entity.setTeam(teamRepository.getReferenceById(teamId));
+            studentRepository.save(entity);
+      }
 }
