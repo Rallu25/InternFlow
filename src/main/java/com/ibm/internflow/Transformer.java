@@ -37,10 +37,7 @@ public class Transformer {
 
     public static TeamEntity fromDto(TeamDto dto) {
         var entity = new TeamEntity();
-        entity.setTeamId(dto.getTeamId());
         entity.setTeamName(dto.getTeamName());
-        entity.setTeamLeader(fromDto(dto.getTeamLeader()));
-        entity.setStudents(dto.getStudents().stream().map(Transformer::fromDto).collect(Collectors.toSet()));
         return entity;
     }
 }

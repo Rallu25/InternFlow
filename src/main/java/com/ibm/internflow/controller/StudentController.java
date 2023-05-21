@@ -5,6 +5,7 @@ import com.ibm.internflow.service.StudentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +34,21 @@ public class StudentController {
         studentService.deleteById(studentId);
     }
 
+    @GetMapping(value = "/teamId/{teamId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public  ResponseEntity<List<StudentDto>> getStudentsByTeam(
+            @PathVariable("teamId") Long teamId) {
+                return ResponseEntity.ok(studentService.getStudentsByTeam(teamId));
+    }
 
+    @DeleteMapping("/team/{studentId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeStudentFromTeam(@PathVariable("studentId") Long studentId) {
+        studentService.removeStudentFromTeam(studentId);
+    }
 
+    @PostMapping("/team/{teamId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void addStudentToTeam(@PathVariable("teamId") Long teamId, @RequestBody StudentDto studentDto) {
+        studentService.addStudentToTeam(teamId, studentDto);
+    }
 }
