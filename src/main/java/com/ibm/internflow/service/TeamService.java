@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 @Service
-
+@Transactional
 public class TeamService {
     private final TeamRepository teamRepository;
     private final StudentRepository studentRepository;
@@ -26,7 +26,6 @@ public class TeamService {
         return teamRepository.findAll().stream().map(Transformer::toDto).toList();
     }
 
-    @Transactional
     public void deleteById(Long id) {
         List<StudentEntity> students = studentRepository.findByTeam_TeamId(id);
         students.forEach(student -> student.setTeam(null));
@@ -34,7 +33,6 @@ public class TeamService {
         teamRepository.deleteById(id);
     }
 
-    @Transactional
     public TeamDto addTeam(TeamDto teamDto) {
         var entity = Transformer.fromDto(teamDto);
         Set<StudentEntity> students = new HashSet<>();

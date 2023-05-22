@@ -4,13 +4,14 @@ import com.ibm.internflow.Transformer;
 import com.ibm.internflow.dto.GradesDto;
 import com.ibm.internflow.repository.GradesRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
 
 
 @Service
-
+@Transactional
 public class GradesService {
     private final GradesRepository gradesRepository;
 

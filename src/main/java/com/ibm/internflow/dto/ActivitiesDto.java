@@ -6,7 +6,7 @@ public class ActivitiesDto {
     private Long activityId;
     private String activityName;
     private GradesDto grade;
-    private List<AttendanceDto> attendances;
+    private AttendanceDto attendance;
 
     public ActivitiesDto() {
     }
@@ -35,11 +35,11 @@ public class ActivitiesDto {
         this.grade = grade;
     }
 
-    public List<AttendanceDto> getAttendances() {
-        return attendances;
+    public AttendanceDto getAttendance() {
+        return attendance;
     }
 
-    public void setAttendances(List<AttendanceDto> attendances) {
-        this.attendances = attendances;
+    public void setAttendance(AttendanceDto attendance) {
+        this.attendance = attendance;
     }
 }
