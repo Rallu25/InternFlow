@@ -4,8 +4,13 @@ import com.ibm.internflow.dto.StudentDto;
 import com.ibm.internflow.dto.TeamDto;
 import com.ibm.internflow.entity.StudentEntity;
 import com.ibm.internflow.entity.TeamEntity;
+import com.ibm.internflow.entity.GradesEntity;
+import com.ibm.internflow.dto.GradesDto;
+import com.ibm.internflow.entity.AttendanceEntity;
+import com.ibm.internflow.dto.AttendanceDto;
+import com.ibm.internflow.entity.ActivitiesEntity;
+import com.ibm.internflow.dto.ActivitiesDto;
 
-import java.util.stream.Collectors;
 
 
 public class Transformer {
@@ -40,4 +45,52 @@ public class Transformer {
         entity.setTeamName(dto.getTeamName());
         return entity;
     }
+
+    public static GradesDto toDto(GradesEntity entity){
+        var dto = new GradesDto();
+        dto.setGradeId(entity.getGradeId());
+        dto.setGradeValue(entity.getGradeValue());
+        dto.setComment(entity.getComment());
+        return dto;
+    }
+
+    public static GradesEntity fromDto(GradesDto dto) {
+
+        var entity = new GradesEntity();
+        entity.setGradeId(dto.getGradeId());
+        entity.setGradeValue(dto.getGradeValue());
+        entity.setComment(dto.getComment());
+        return entity;
+    }
+
+    public static AttendanceDto toDto(AttendanceEntity entity){
+        var dto = new AttendanceDto();
+        dto.setAttendanceId(entity.getAttendanceId());
+        dto.setStatus(entity.getStatus());
+        return dto;
+    }
+
+    public static AttendanceEntity fromDto(AttendanceDto dto){
+        var entity = new AttendanceEntity();
+        entity.setAttendanceId(dto.getAttendanceId());
+        entity.setStatus(dto.getStatus());
+        return entity;
+    }
+
+    public static ActivitiesDto toDto(ActivitiesEntity entity) {
+        var dto = new ActivitiesDto();
+        dto.setActivityId(entity.getActivityId());
+        dto.setActivityName(entity.getActivityName());
+        dto.setGrade(toDto(entity.getGrade()));
+        dto.setAttendances(entity.getAttendances().stream().map(Transformer::toDto).toList());
+        return dto;
+    }
+
+    public static ActivitiesEntity fromDto(ActivitiesDto dto) {
+        var entity = new ActivitiesEntity();
+        entity.setActivityId(dto.getActivityId());
+        entity.setActivityName(dto.getActivityName());
+        return entity;
+    }
+
 }

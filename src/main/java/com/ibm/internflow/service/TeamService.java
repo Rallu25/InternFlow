@@ -44,7 +44,6 @@ public class TeamService {
         entity.setTeamLeader(teamLeader);
         teamRepository.save(entity);
         setTeamOnStudent(entity, students, teamLeader);
-
         return Transformer.toDto(entity);
     }
 
