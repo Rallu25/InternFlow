@@ -40,6 +40,12 @@ public class StudentController {
                 return ResponseEntity.ok(studentService.getStudentsByTeam(teamId));
     }
 
+    @GetMapping(value = "/activityId/{activityId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public  ResponseEntity<List<StudentDto>> getStudentsByActivity(
+            @PathVariable("activityId") Long activityId) {
+        return ResponseEntity.ok(studentService.getStudentsByActivity(activityId));
+    }
+
     @DeleteMapping("/team/{studentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removeStudentFromTeam(@PathVariable("studentId") Long studentId) {

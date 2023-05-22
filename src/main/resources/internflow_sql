@@ -12,7 +12,8 @@ CREATE SEQUENCE intern_flow.sq_id START 1;
 
 CREATE TABLE IF NOT EXISTS intern_flow.Team (
     team_id BIGINT PRIMARY KEY DEFAULT NEXTVAL('intern_flow.sq_team_id'),
-    team_leader_id BIGINT REFERENCES intern_flow.Student(student_id)
+    team_leader_id BIGINT REFERENCES intern_flow.Student(student_id),
+    team_name VARCHAR(50) NOT NULL
 );
 
 
@@ -36,6 +37,7 @@ CREATE TABLE IF NOT EXISTS intern_flow.Mentor (
 
 CREATE TABLE IF NOT EXISTS intern_flow.Attendance (
     attendance_id BIGINT PRIMARY KEY DEFAULT NEXTVAL('intern_flow.sq_attendance_id'),
+    mentor_id BIGINT REFERENCES intern_flow.Mentor(mentor_id),
     status VARCHAR(10) NOT NULL
 );
 
@@ -51,7 +53,6 @@ CREATE TABLE IF NOT EXISTS intern_flow.Grades (
 CREATE TABLE IF NOT EXISTS intern_flow.Activities (
     activity_id BIGINT PRIMARY KEY DEFAULT NEXTVAL('intern_flow.sq_activity_id'),
     attendance_id BIGINT REFERENCES intern_flow.Attendance(attendance_id),
-    student_id BIGINT REFERENCES intern_flow.Student(student_id),
     grade_id BIGINT REFERENCES intern_flow.Grades(grade_id),
     activity_name VARCHAR(50) NOT NULL
 );

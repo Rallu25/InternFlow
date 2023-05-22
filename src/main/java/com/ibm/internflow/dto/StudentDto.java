@@ -5,7 +5,9 @@ public class StudentDto {
     private String firstName;
     private String  lastName;
     private String  email;
-    private TeamDto team;
+    private String team;
+    private String attendance;
+    private Long grade;
 
 
     public StudentDto() {
@@ -43,11 +45,27 @@ public class StudentDto {
         this.email = email;
     }
 
-    public TeamDto getTeam() {
+    public String getTeam() {
         return team;
     }
 
-    public void setTeam(TeamDto team) {
+    public void setTeam(String team) {
         this.team = team;
+    }
+
+    public String getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(String attendance) {
+        this.attendance = attendance;
+    }
+
+    public Long getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Long grade) {
+        this.grade = grade;
     }
 }

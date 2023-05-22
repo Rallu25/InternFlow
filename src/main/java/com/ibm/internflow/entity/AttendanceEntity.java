@@ -24,8 +24,7 @@ public class AttendanceEntity {
     @NonNull
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "activity_id")
+    @OneToOne(mappedBy = "attendance")
     private ActivitiesEntity activities;
 
     @ManyToOne(fetch = FetchType.LAZY)

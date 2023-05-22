@@ -24,20 +24,18 @@ public class ActivitiesEntity {
     private String activityName;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "Student_Activities",
+    @JoinTable(name = "student_activities",
             joinColumns = {@JoinColumn(name = "activity_id")},
             inverseJoinColumns = {@JoinColumn(name = "student_id")})
     private Set<StudentEntity> students = new HashSet<>();
 
     @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "activity_id")
+    private AttendanceEntity attendance;
+
+    @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "grade_id")
     private GradesEntity grade;
-
-    @OneToMany(mappedBy = "activities")
-    private Set<AttendanceEntity> attendances;
-
-    @OneToOne(mappedBy = "activities")
-    private GradesEntity grades;
 
     public ActivitiesEntity() {
         //no-arg Constructor
@@ -76,11 +74,11 @@ public class ActivitiesEntity {
         this.grade = grade;
     }
 
-    public Set<AttendanceEntity> getAttendances() {
-        return attendances;
+    public AttendanceEntity getAttendance() {
+        return attendance;
     }
 
-    public void setAttendances(Set<AttendanceEntity> attendances) {
-        this.attendances = attendances;
+    public void setAttendance(AttendanceEntity attendance) {
+        this.attendance = attendance;
     }
 }

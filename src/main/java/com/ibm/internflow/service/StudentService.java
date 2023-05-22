@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class StudentService {
       private final StudentRepository studentRepository;
       private final MentorRepository mentorRepository;
@@ -31,7 +32,6 @@ public class StudentService {
             return studentRepository.findAll().stream().map(Transformer::toDto).toList();
 
       }
-      @Transactional
       public void deleteById(Long id) {
             studentRepository.deleteById(id);
       }
@@ -56,5 +56,10 @@ public class StudentService {
             var entity = Transformer.fromDto(studentDto);
             entity.setTeam(teamRepository.getReferenceById(teamId));
             studentRepository.save(entity);
+      }
+
+      public List<StudentDto> getStudentsByActivity(Long activityId) {
+            List<StudentEntity> students = studentRepository.findByActivities_ActivityId(activityId);
+            return students.stream().map(s -> Transformer.toDto(s, activityId)).collect(Collectors.toList());
       }
 }
