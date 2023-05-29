@@ -24,14 +24,9 @@ public class AttendanceController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<AttendanceDto> addAttendance(@RequestBody AttendanceDto attendanceDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(attendanceService.addAttendance(attendanceDto));
+    public void addAttendance(@RequestBody AttendanceDto attendanceDto) {
+        attendanceService.addAttendance(attendanceDto);
     }
-
-//    @PostMapping("/{activityId}", consumes = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<AttendanceDto> addAttendance(@PathVariable("activityId") Long activityId, @RequestBody AttendanceDto attendanceDto) {
-//        return ResponseEntity.status(HttpStatus.CREATED).body(attendanceService.addAttendance(activityId, attendanceDto));
-//    }
 
     @Transactional
     @DeleteMapping("/{attendanceId}")
