@@ -3,6 +3,7 @@ package com.ibm.internflow.dto;
 public class AttendanceDto {
     private Long attendanceId;
     private Long studentId;
+    private Long activityId;
     private String status;
 
     public AttendanceDto() {
@@ -30,5 +31,13 @@ public class AttendanceDto {
 
     public void setStudentId(Long studentId) {
         this.studentId = studentId;
+    }
+
+    public Long getActivityId() {
+        return activityId;
+    }
+
+    public void setActivityId(Long activityId) {
+        this.activityId = activityId;
     }
 }

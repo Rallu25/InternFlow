@@ -93,7 +93,6 @@ public class Transformer {
 
     public static AttendanceEntity fromDto(AttendanceDto dto) {
         var entity = new AttendanceEntity();
-        entity.setAttendanceId(dto.getAttendanceId());
         entity.setStatus(dto.getStatus());
         return entity;
     }
