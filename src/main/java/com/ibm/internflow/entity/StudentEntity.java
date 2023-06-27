@@ -40,6 +40,13 @@ public class StudentEntity {
     @ManyToMany(mappedBy = "students")
     private Set<ActivitiesEntity> activities = new HashSet<>();
 
+    @OneToMany(mappedBy = "student")
+    private Set<AttendanceEntity> attendances;
+
+    @OneToMany(mappedBy = "student")
+    private Set<GradesEntity> grades;
+
+
 
 
     public Long getStudentId() {
@@ -94,5 +101,21 @@ public class StudentEntity {
 
     public void setTeam(TeamEntity team) {
         this.team = team;
+    }
+
+    public Set<AttendanceEntity> getAttendances() {
+        return attendances;
+    }
+
+    public void setAttendances(Set<AttendanceEntity> attendances) {
+        this.attendances = attendances;
+    }
+
+    public Set<GradesEntity> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Set<GradesEntity> grades) {
+        this.grades = grades;
     }
 }

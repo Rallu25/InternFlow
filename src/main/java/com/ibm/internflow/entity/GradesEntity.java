@@ -22,12 +22,18 @@ public class GradesEntity {
     @Column(name="comment")
     private String comment;
 
-    @OneToOne(mappedBy = "grade")
-    private ActivitiesEntity activities;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mentor_id")
     private MentorEntity mentor;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "student_id")
+    private StudentEntity student;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "activity_id")
+    private ActivitiesEntity activity;
 
     public GradesEntity() {
         //no-arg Constructor
@@ -57,13 +63,6 @@ public class GradesEntity {
         this.comment = comment;
     }
 
-    public ActivitiesEntity getActivities() {
-        return activities;
-    }
-
-    public void setActivities(ActivitiesEntity activities) {
-        this.activities = activities;
-    }
 
     public MentorEntity getMentor() {
         return mentor;
@@ -71,5 +70,21 @@ public class GradesEntity {
 
     public void setMentor(MentorEntity mentor) {
         this.mentor = mentor;
+    }
+
+    public StudentEntity getStudent() {
+        return student;
+    }
+
+    public void setStudent(StudentEntity student) {
+        this.student = student;
+    }
+
+    public ActivitiesEntity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(ActivitiesEntity activity) {
+        this.activity = activity;
     }
 }

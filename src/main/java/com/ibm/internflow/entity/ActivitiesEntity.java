@@ -29,13 +29,11 @@ public class ActivitiesEntity {
             inverseJoinColumns = {@JoinColumn(name = "student_id")})
     private Set<StudentEntity> students = new HashSet<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "activity_id")
-    private AttendanceEntity attendance;
+    @OneToMany(mappedBy = "activity")
+    private Set<AttendanceEntity> attendances;
 
-    @OneToOne (fetch = FetchType.LAZY)
-    @JoinColumn(name = "grade_id")
-    private GradesEntity grade;
+    @OneToMany(mappedBy = "activity")
+    private Set<GradesEntity> grades;
 
     public ActivitiesEntity() {
         //no-arg Constructor
@@ -66,19 +64,20 @@ public class ActivitiesEntity {
         this.students = students;
     }
 
-    public GradesEntity getGrade() {
-        return grade;
+
+    public Set<AttendanceEntity> getAttendances() {
+        return attendances;
     }
 
-    public void setGrade(GradesEntity grade) {
-        this.grade = grade;
+    public void setAttendances(Set<AttendanceEntity> attendances) {
+        this.attendances = attendances;
     }
 
-    public AttendanceEntity getAttendance() {
-        return attendance;
+    public Set<GradesEntity> getGrades() {
+        return grades;
     }
 
-    public void setAttendance(AttendanceEntity attendance) {
-        this.attendance = attendance;
+    public void setGrades(Set<GradesEntity> grades) {
+        this.grades = grades;
     }
 }

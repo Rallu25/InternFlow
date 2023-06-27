@@ -5,7 +5,7 @@ import java.util.List;
 public class ActivitiesDto {
     private Long activityId;
     private String activityName;
-    private GradesDto grade;
+    private List<GradesDto> grades;
     private AttendanceDto attendance;
 
     public ActivitiesDto() {
@@ -27,13 +27,6 @@ public class ActivitiesDto {
         this.activityName = activityName;
     }
 
-    public GradesDto getGrade() {
-        return grade;
-    }
-
-    public void setGrade(GradesDto grade) {
-        this.grade = grade;
-    }
 
     public AttendanceDto getAttendance() {
         return attendance;
@@ -41,5 +34,13 @@ public class ActivitiesDto {
 
     public void setAttendance(AttendanceDto attendance) {
         this.attendance = attendance;
+    }
+
+    public List<GradesDto> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<GradesDto> grades) {
+        this.grades = grades;
     }
 }
