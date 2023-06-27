@@ -29,16 +29,20 @@ public class Transformer {
         if (entity.getTeam() != null) {
             dto.setTeam(entity.getTeam().getTeamName());
         }
-        Optional<ActivitiesEntity> activity = entity.getActivities()
-                .stream().filter(a -> Objects.equals(a.getActivityId(), activityId)).findFirst();
-        activity.ifPresent(a -> dto.setAttendance(getAttendance(a)));
+        if (entity.getAttendances() != null){
+        Optional<AttendanceEntity> attendance = entity.getAttendances()
+                .stream().filter(a -> Objects.equals(a.getActivity().getActivityId(), activityId)).findFirst();
+        attendance.ifPresent(a -> dto.setAttendance(a.getStatus()));}
+        if (entity.getGrades() != null){
+        Optional<GradesEntity> grade = entity.getGrades()
+                .stream().filter(a -> Objects.equals(a.getActivity().getActivityId(), activityId)).findFirst();
+        grade.ifPresent(
+               a -> {dto.setGrade(a.getGradeValue()); dto.setComment(a.getComment());}
+                );}
 
         return dto;
     }
 
-    private static String getAttendance(ActivitiesEntity a) {
-        return a.getAttendance() == null ? null : a.getAttendance().getStatus();
-    }
 
     public static StudentEntity fromDto(StudentDto dto) {
         var entity = new StudentEntity();
@@ -76,7 +80,7 @@ public class Transformer {
     public static GradesEntity fromDto(GradesDto dto) {
 
         var entity = new GradesEntity();
-        entity.setGradeId(dto.getGradeId());
+//        entity.setGradeId(dto.getGradeId());
         entity.setGradeValue(dto.getGradeValue());
         entity.setComment(dto.getComment());
         return entity;
@@ -87,12 +91,14 @@ public class Transformer {
         if (entity != null) {
             dto.setAttendanceId(entity.getAttendanceId());
             dto.setStatus(entity.getStatus());
+
         }
         return dto;
     }
 
     public static AttendanceEntity fromDto(AttendanceDto dto) {
         var entity = new AttendanceEntity();
+//        entity.setAttendanceId(dto.getAttendanceId());
         entity.setStatus(dto.getStatus());
         return entity;
     }
@@ -101,8 +107,6 @@ public class Transformer {
         var dto = new ActivitiesDto();
         dto.setActivityId(entity.getActivityId());
         dto.setActivityName(entity.getActivityName());
-        dto.setGrade(toDto(entity.getGrade()));
-        dto.setAttendance(toDto(entity.getAttendance()));
         return dto;
     }
 

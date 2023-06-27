@@ -34,16 +34,19 @@ public class AttendanceService {
 
     public void addAttendance(AttendanceDto attendanceDto) {
         var entity = Transformer.fromDto(attendanceDto);
-        attendanceRepository.save(entity);
         StudentEntity student = studentRepository.getReferenceById(attendanceDto.getStudentId());
         Optional<ActivitiesEntity> optionalActivity = student.getActivities().stream().filter(a -> Objects.equals(a.getActivityId(), attendanceDto.getActivityId())).findFirst();
         if (optionalActivity.isPresent()) {
             ActivitiesEntity activity = optionalActivity.get();
-            activity.setAttendance(entity);
-            activitiesRepository.save(activity);
+            //activity.setAttendance(entity);
+            entity.setActivity(activity);
+            //activitiesRepository.save(activity);
+            entity.setStudent(student);
             student.setActivities(addActivity(activity, student));
             studentRepository.save(student);
+            attendanceRepository.save(entity);
         }
+
     }
 
     private Set<ActivitiesEntity> addActivity(ActivitiesEntity activity, StudentEntity student) {
