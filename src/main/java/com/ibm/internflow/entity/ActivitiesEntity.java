@@ -3,6 +3,8 @@ package com.ibm.internflow.entity;
 import jakarta.persistence.*;
 import org.springframework.lang.NonNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +24,13 @@ public class ActivitiesEntity {
     @Column(name = "activity_name")
     @NonNull
     private String activityName;
+
+
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
+
+    @Column(name = "activity_date")
+    private LocalDate activityDate;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "student_activities",
@@ -79,5 +88,21 @@ public class ActivitiesEntity {
 
     public void setGrades(Set<GradesEntity> grades) {
         this.grades = grades;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public LocalDate getActivityDate() {
+        return activityDate;
+    }
+
+    public void setActivityDate(LocalDate activityDate) {
+        this.activityDate = activityDate;
     }
 }

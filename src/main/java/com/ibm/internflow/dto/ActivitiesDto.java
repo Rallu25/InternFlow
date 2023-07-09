@@ -1,5 +1,7 @@
 package com.ibm.internflow.dto;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ActivitiesDto {
@@ -7,6 +9,8 @@ public class ActivitiesDto {
     private String activityName;
     private List<GradesDto> grades;
     private AttendanceDto attendance;
+    private LocalDateTime creationDate;
+    private LocalDate activityDate;
 
     public ActivitiesDto() {
     }
@@ -42,5 +46,21 @@ public class ActivitiesDto {
 
     public void setGrades(List<GradesDto> grades) {
         this.grades = grades;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public LocalDate getActivityDate() {
+        return activityDate;
+    }
+
+    public void setActivityDate(LocalDate activityDate) {
+        this.activityDate = activityDate;
     }
 }
