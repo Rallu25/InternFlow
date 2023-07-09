@@ -107,12 +107,16 @@ public class Transformer {
         var dto = new ActivitiesDto();
         dto.setActivityId(entity.getActivityId());
         dto.setActivityName(entity.getActivityName());
+        dto.setCreationDate(entity.getCreationDate());
+        dto.setActivityDate(entity.getActivityDate());
         return dto;
     }
 
     public static ActivitiesEntity fromDto(ActivitiesDto dto) {
         var entity = new ActivitiesEntity();
         entity.setActivityName(dto.getActivityName());
+        entity.setCreationDate(dto.getCreationDate());
+        entity.setActivityDate(dto.getActivityDate());
         return entity;
     }
 
