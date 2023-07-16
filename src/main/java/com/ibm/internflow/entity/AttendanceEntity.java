@@ -24,8 +24,6 @@ public class AttendanceEntity {
     @NonNull
     private String status;
 
-
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "mentor_id")
     private MentorEntity mentor;
