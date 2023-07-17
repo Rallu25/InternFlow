@@ -5,7 +5,6 @@ import com.ibm.internflow.entity.ActivitiesEntity;
 import com.ibm.internflow.entity.AttendanceEntity;
 import com.ibm.internflow.entity.StudentEntity;
 import com.ibm.internflow.repository.AttendanceRepository;
-import com.ibm.internflow.repository.ActivitiesRepository;
 import com.ibm.internflow.repository.StudentRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,12 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.Optional;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class AttendanceServiceTest {
@@ -28,9 +24,6 @@ public class AttendanceServiceTest {
 
     @Mock
     private StudentRepository studentRepository;
-
-    @Mock
-    private ActivitiesRepository activitiesRepository;
 
     @InjectMocks
     private AttendanceService attendanceService;
@@ -70,8 +63,6 @@ public class AttendanceServiceTest {
     @Test
     public void testDeleteById() {
         Long attendanceId = 1L;
-
-        doNothing().when(attendanceRepository).deleteById(attendanceId);
 
         attendanceService.deleteById(attendanceId);
 

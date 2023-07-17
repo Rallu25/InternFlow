@@ -27,15 +27,31 @@ public class ActivitiesControllerTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
     }
+
+    @Test
+    public void testAddActivities() {
+        ActivitiesDto activitiesDto = new ActivitiesDto();
+        activitiesDto.setActivityName("Session1");
+
+        when(activitiesService.addActivities(any(ActivitiesDto.class))).thenReturn(activitiesDto);
+
+        ResponseEntity<ActivitiesDto> responseEntity = activitiesController.addActivities(activitiesDto);
+
+        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
+        assertEquals(activitiesDto, responseEntity.getBody());
+
+        verify(activitiesService, times(1)).addActivities(any(ActivitiesDto.class));
+    }
+
     @Test
     public void testGetActivities() {
         ActivitiesDto activity1 = new ActivitiesDto();
         activity1.setActivityId(1L);
-        activity1.setActivityName("Activity 1");
+        activity1.setActivityName("Session1");
 
         ActivitiesDto activity2 = new ActivitiesDto();
         activity2.setActivityId(2L);
-        activity2.setActivityName("Activity 2");
+        activity2.setActivityName("Session2");
 
         List<ActivitiesDto> activitiesList = List.of(activity1, activity2);
 
@@ -47,21 +63,6 @@ public class ActivitiesControllerTest {
         assertEquals(activitiesList, responseEntity.getBody());
 
         verify(activitiesService, times(1)).getActivities();
-    }
-
-    @Test
-    public void testAddActivities() {
-        ActivitiesDto activitiesDto = new ActivitiesDto();
-        activitiesDto.setActivityName("Sample Activity");
-
-        when(activitiesService.addActivities(any(ActivitiesDto.class))).thenReturn(activitiesDto);
-
-        ResponseEntity<ActivitiesDto> responseEntity = activitiesController.addActivities(activitiesDto);
-
-        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
-        assertEquals(activitiesDto, responseEntity.getBody());
-
-        verify(activitiesService, times(1)).addActivities(any(ActivitiesDto.class));
     }
 
     @Test
