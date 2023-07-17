@@ -36,7 +36,7 @@ public class TeamServiceTest {
     @Test
     void testAddTeam() {
         TeamDto teamDto = new TeamDto();
-        teamDto.setTeamName("Team A");
+        teamDto.setTeamName("Internflow");
 
         StudentDto teamLeaderDto = new StudentDto();
         teamLeaderDto.setStudentId(1L);
@@ -53,7 +53,7 @@ public class TeamServiceTest {
         teamDto.setStudents(students);
 
         TeamEntity teamEntity = new TeamEntity();
-        teamEntity.setTeamName("Team A");
+        teamEntity.setTeamName("Internflow");
 
         StudentEntity teamLeaderEntity = new StudentEntity();
         teamLeaderEntity.setStudentId(1L);
@@ -76,7 +76,7 @@ public class TeamServiceTest {
 
         TeamDto addedTeamDto = teamService.addTeam(teamDto);
 
-        assertEquals("Team A", addedTeamDto.getTeamName());
+        assertEquals("Internflow", addedTeamDto.getTeamName());
         assertEquals(1L, addedTeamDto.getTeamLeader().getStudentId());
         assertEquals(3, addedTeamDto.getStudents().size());
 

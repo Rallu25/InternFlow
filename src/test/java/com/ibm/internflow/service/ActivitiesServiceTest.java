@@ -43,7 +43,7 @@ public class ActivitiesServiceTest {
     void testGetActivities() {
         ActivitiesEntity activityEntity = new ActivitiesEntity();
         activityEntity.setActivityId(1L);
-        activityEntity.setActivityName("Sample Activity");
+        activityEntity.setActivityName("Session1");
         activityEntity.setCreationDate(LocalDateTime.now());
         activityEntity.setActivityDate(LocalDate.now());
 
@@ -60,12 +60,12 @@ public class ActivitiesServiceTest {
     @Test
     void testAddActivities() {
         ActivitiesDto activityDto = new ActivitiesDto();
-        activityDto.setActivityName("Sample Activity");
+        activityDto.setActivityName("Session1");
         activityDto.setActivityDate(LocalDate.now());
 
         ActivitiesEntity activityEntity = new ActivitiesEntity();
         activityEntity.setActivityId(1L);
-        activityEntity.setActivityName("Sample Activity");
+        activityEntity.setActivityName("Session1");
         activityEntity.setCreationDate(LocalDateTime.now());
         activityEntity.setActivityDate(LocalDate.now());
 

@@ -23,14 +23,29 @@ public class GradesControllerTest {
     }
 
     @Test
+    public void testAddGrades() {
+        GradesDto gradesDto = new GradesDto();
+        gradesDto.setGradeValue(9);
+
+        when(gradesService.addGrades(any(GradesDto.class))).thenReturn(gradesDto);
+
+        ResponseEntity<GradesDto> responseEntity = gradesController.addGrades(gradesDto);
+
+        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
+        assertEquals(gradesDto, responseEntity.getBody());
+
+        verify(gradesService, times(1)).addGrades(any(GradesDto.class));
+    }
+
+    @Test
     public void testGetGrades() {
         GradesDto grade1 = new GradesDto();
         grade1.setGradeId(1L);
-        grade1.setGradeValue(85);
+        grade1.setGradeValue(8);
 
         GradesDto grade2 = new GradesDto();
         grade2.setGradeId(2L);
-        grade2.setGradeValue(95);
+        grade2.setGradeValue(10);
 
         List<GradesDto> gradesList = List.of(grade1, grade2);
 
@@ -42,21 +57,6 @@ public class GradesControllerTest {
         assertEquals(gradesList, responseEntity.getBody());
 
         verify(gradesService, times(1)).getGrades();
-    }
-
-    @Test
-    public void testAddGrades() {
-        GradesDto gradesDto = new GradesDto();
-        gradesDto.setGradeValue(90);
-
-        when(gradesService.addGrades(any(GradesDto.class))).thenReturn(gradesDto);
-
-        ResponseEntity<GradesDto> responseEntity = gradesController.addGrades(gradesDto);
-
-        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
-        assertEquals(gradesDto, responseEntity.getBody());
-
-        verify(gradesService, times(1)).addGrades(any(GradesDto.class));
     }
 
 }

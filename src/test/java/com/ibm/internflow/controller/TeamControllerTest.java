@@ -26,11 +26,11 @@ public class TeamControllerTest {
     public void testGetTeams() {
         TeamDto team1 = new TeamDto();
         team1.setTeamId(1L);
-        team1.setTeamName("Team 1");
+        team1.setTeamName("Internflow");
 
         TeamDto team2 = new TeamDto();
         team2.setTeamId(2L);
-        team2.setTeamName("Team 2");
+        team2.setTeamName("COLA");
 
         List<TeamDto> teamsList = List.of(team1, team2);
 
@@ -47,7 +47,7 @@ public class TeamControllerTest {
     @Test
     public void testAddTeam() {
         TeamDto teamDto = new TeamDto();
-        teamDto.setTeamName("Sample Team");
+        teamDto.setTeamName("Internflow");
 
         when(teamService.addTeam(any(TeamDto.class))).thenReturn(teamDto);
 

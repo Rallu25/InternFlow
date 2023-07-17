@@ -23,14 +23,32 @@ public class StudentControllerTest {
     }
 
     @Test
+    public void testAddStudent() {
+        StudentDto studentDto = new StudentDto();
+        studentDto.setFirstName("Raluca");
+        studentDto.setLastName("Osman");
+
+        when(studentService.addStudent(any(StudentDto.class))).thenReturn(studentDto);
+
+        ResponseEntity<StudentDto> responseEntity = studentController.addStudent(studentDto);
+
+        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
+        assertEquals(studentDto, responseEntity.getBody());
+
+        verify(studentService, times(1)).addStudent(any(StudentDto.class));
+    }
+
+    @Test
     public void testGetStudents() {
         StudentDto student1 = new StudentDto();
         student1.setStudentId(1L);
-        student1.setFirstName("John");
+        student1.setFirstName("Vlad");
+        student1.setLastName("Pavel");
 
         StudentDto student2 = new StudentDto();
         student2.setStudentId(2L);
-        student2.setFirstName("Jane");
+        student2.setFirstName("Maria");
+        student2.setLastName("Popescu");
 
         List<StudentDto> studentsList = List.of(student1, student2);
 
@@ -45,21 +63,6 @@ public class StudentControllerTest {
     }
 
     @Test
-    public void testAddStudent() {
-        StudentDto studentDto = new StudentDto();
-        studentDto.setFirstName("John");
-
-        when(studentService.addStudent(any(StudentDto.class))).thenReturn(studentDto);
-
-        ResponseEntity<StudentDto> responseEntity = studentController.addStudent(studentDto);
-
-        assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
-        assertEquals(studentDto, responseEntity.getBody());
-
-        verify(studentService, times(1)).addStudent(any(StudentDto.class));
-    }
-
-    @Test
     public void testDeleteStudentById() {
         Long studentId = 1L;
 
@@ -67,73 +70,79 @@ public class StudentControllerTest {
 
         verify(studentService, times(1)).deleteById(studentId);
     }
-        @Test
-        public void testGetStudentsByTeam() {
-            Long teamId = 1L;
 
-            StudentDto student1 = new StudentDto();
-            student1.setStudentId(1L);
-            student1.setFirstName("John");
+    @Test
+    public void testGetStudentsByTeam() {
+        Long teamId = 1L;
 
-            StudentDto student2 = new StudentDto();
-            student2.setStudentId(2L);
-            student2.setFirstName("Jane");
+        StudentDto student1 = new StudentDto();
+        student1.setStudentId(1L);
+        student1.setFirstName("Maria");
+        student1.setLastName("Popescu");
 
-            List<StudentDto> studentsList = List.of(student1, student2);
+        StudentDto student2 = new StudentDto();
+        student2.setStudentId(2L);
+        student2.setFirstName("Ioana");
+        student2.setLastName("Radu");
 
-            when(studentService.getStudentsByTeam(teamId)).thenReturn(studentsList);
+        List<StudentDto> studentsList = List.of(student1, student2);
 
-            ResponseEntity<List<StudentDto>> responseEntity = studentController.getStudentsByTeam(teamId);
+        when(studentService.getStudentsByTeam(teamId)).thenReturn(studentsList);
 
-            assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-            assertEquals(studentsList, responseEntity.getBody());
+        ResponseEntity<List<StudentDto>> responseEntity = studentController.getStudentsByTeam(teamId);
 
-            verify(studentService, times(1)).getStudentsByTeam(teamId);
-        }
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(studentsList, responseEntity.getBody());
 
-        @Test
-        public void testRemoveStudentFromTeam() {
-            Long studentId = 1L;
+        verify(studentService, times(1)).getStudentsByTeam(teamId);
+    }
 
-            studentController.removeStudentFromTeam(studentId);
+    @Test
+    public void testRemoveStudentFromTeam() {
+        Long studentId = 1L;
 
-            verify(studentService, times(1)).removeStudentFromTeam(studentId);
-        }
+        studentController.removeStudentFromTeam(studentId);
 
-        @Test
-        public void testAddStudentToTeam() {
-            Long teamId = 1L;
-            StudentDto studentDto = new StudentDto();
-            studentDto.setFirstName("John");
+        verify(studentService, times(1)).removeStudentFromTeam(studentId);
+    }
 
-            studentController.addStudentToTeam(teamId, studentDto);
+    @Test
+    public void testAddStudentToTeam() {
+        Long teamId = 1L;
+        StudentDto studentDto = new StudentDto();
+        studentDto.setFirstName("Ema");
+        studentDto.setLastName("Rusu");
 
-            verify(studentService, times(1)).addStudentToTeam(teamId, studentDto);
-        }
+        studentController.addStudentToTeam(teamId, studentDto);
 
-        @Test
-        public void testGetStudentsByActivity() {
-            Long activityId = 1L;
+        verify(studentService, times(1)).addStudentToTeam(teamId, studentDto);
+    }
 
-            StudentDto student1 = new StudentDto();
-            student1.setStudentId(1L);
-            student1.setFirstName("John");
+    @Test
+    public void testGetStudentsByActivity() {
+        Long activityId = 1L;
 
-            StudentDto student2 = new StudentDto();
-            student2.setStudentId(2L);
-            student2.setFirstName("Jane");
+        StudentDto student1 = new StudentDto();
+        student1.setStudentId(1L);
+        student1.setFirstName("Ioana");
+        student1.setLastName("Matei");
 
-            List<StudentDto> studentsList = List.of(student1, student2);
+        StudentDto student2 = new StudentDto();
+        student2.setStudentId(2L);
+        student2.setFirstName("Flavius");
+        student2.setLastName("Lazar");
 
-            when(studentService.getStudentsByActivity(activityId)).thenReturn(studentsList);
+        List<StudentDto> studentsList = List.of(student1, student2);
 
-            ResponseEntity<List<StudentDto>> responseEntity = studentController.getStudentsByActivity(activityId);
+        when(studentService.getStudentsByActivity(activityId)).thenReturn(studentsList);
 
-            assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-            assertEquals(studentsList, responseEntity.getBody());
+        ResponseEntity<List<StudentDto>> responseEntity = studentController.getStudentsByActivity(activityId);
 
-            verify(studentService, times(1)).getStudentsByActivity(activityId);
-        }
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertEquals(studentsList, responseEntity.getBody());
+
+        verify(studentService, times(1)).getStudentsByActivity(activityId);
+    }
 
     }
 
