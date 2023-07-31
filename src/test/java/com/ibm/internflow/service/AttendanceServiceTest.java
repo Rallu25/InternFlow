@@ -15,6 +15,7 @@ import org.mockito.MockitoAnnotations;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 public class AttendanceServiceTest {
@@ -67,5 +68,17 @@ public class AttendanceServiceTest {
         attendanceService.deleteById(attendanceId);
 
         verify(attendanceRepository, times(1)).deleteById(attendanceId);
+    }
+
+    @Test
+    public void testDeleteByIdThrowsNullPointerException() {
+
+        Long attendanceId = 1L;
+
+        doThrow(NullPointerException.class).when(attendanceRepository).deleteById(any());
+
+        assertThrows(NullPointerException.class, () -> {
+            attendanceService.deleteById(attendanceId);
+        });
     }
 }

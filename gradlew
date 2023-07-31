@@ -1,3 +1,4 @@
+./gradlew test
 #!/bin/sh
 
 #

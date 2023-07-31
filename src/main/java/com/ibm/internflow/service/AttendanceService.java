@@ -38,9 +38,7 @@ public class AttendanceService {
         Optional<ActivitiesEntity> optionalActivity = student.getActivities().stream().filter(a -> Objects.equals(a.getActivityId(), attendanceDto.getActivityId())).findFirst();
         if (optionalActivity.isPresent()) {
             ActivitiesEntity activity = optionalActivity.get();
-            //activity.setAttendance(entity);
             entity.setActivity(activity);
-            //activitiesRepository.save(activity);
             entity.setStudent(student);
             student.setActivities(addActivity(activity, student));
             studentRepository.save(student);

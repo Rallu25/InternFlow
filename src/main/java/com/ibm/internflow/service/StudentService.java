@@ -58,16 +58,11 @@ public class StudentService {
             studentRepository.save(entity);
       }
 
-//      public List<StudentDto> getStudentsByActivity(Long activityId) {
-//            List<StudentEntity> students = studentRepository.findByActivities_ActivityId(activityId);
-//            return students.stream().map(s -> Transformer.toDto(s, activityId)).collect(Collectors.toList());
-//      }
-
       public List<StudentDto> getStudentsByActivity(Long activityId) {
             List<StudentEntity> students = studentRepository.findByActivities_ActivityId(activityId);
 
             List<StudentEntity> studentsWithTeam = students.stream()
-                    .filter(s -> s.getTeam() != null)
+                    .filter(s -> s.getTeam() != null )
                     .toList();
 
             return studentsWithTeam.stream()
