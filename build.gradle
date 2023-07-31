@@ -15,15 +15,30 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.0.2'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.postgresql:postgresql:42.5.4'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	testImplementation 'com.h2database:h2:2.2.220'
 	testImplementation 'org.junit.jupiter:junit-jupiter:5.7.2'
 	testImplementation 'org.assertj:assertj-core:3.21.0'
 	testImplementation 'org.hamcrest:hamcrest:2.2'
 	testImplementation 'org.mockito:mockito-core:4.2.0'
+	testImplementation 'org.springframework:spring-test:6.0.7'
+	testImplementation 'junit:junit:4.13.1'
+
+
 }
 
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+test {
+	systemProperty "spring.profiles.active", "test"
+}
+
+bootRun {
+	systemProperty "spring.profiles.active", "dev"
+}
+
+
